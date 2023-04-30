@@ -14,8 +14,8 @@ class User < ApplicationRecord
     length: { maximum: 50 }
 
   has_many :books, dependent: :destroy
-  has_many :relationships, class_name:"relationship", foregin_key:"follower_id", dependent: :destroy
-  has_many :relationshipss, class_name:"relationship", foregin_key:"followed_id", dependent: :destroy
+  has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  has_many :relationshipss, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
 
   has_many :followings, through: :relationships, source: :followed
   has_many :followers, through: :relationshipss, source: :follower
@@ -29,10 +29,10 @@ class User < ApplicationRecord
   end
 
   def follow(user_id)
-    relationships.create(follwed_id: user_id)
+    relationships.create(followed_id: user_id)
   end
 
-  def unfollow(uesr_id)
+  def unfollow(user_id)
     relationships.find_by(followed_id: user_id).destroy
   end
 
