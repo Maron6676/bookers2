@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_one_attached :profile_image
 
+
   validates :name,
     uniqueness: true,
     length: { minimum: 2, maximum: 20 }
@@ -19,6 +20,8 @@ class User < ApplicationRecord
 
   has_many :followings, through: :relationships, source: :followed
   has_many :followers, through: :relationshipss, source: :follower
+
+  has_many :favorites, dependent: :destroy
 
   def get_profile_image
     unless profile_image.attached?
@@ -53,6 +56,10 @@ class User < ApplicationRecord
     else
       @user = User.all
     end
+  end
+
+  def favorited_by?(book_id)
+    favorites.where(book_id: book_id).exists?
   end
 
 

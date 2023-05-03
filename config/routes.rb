@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'favorites/index'
   devise_for :users
   root to: 'homes#top'
   get  "home/about" => 'homes#about'
@@ -12,5 +13,7 @@ Rails.application.routes.draw do
     get 'followers' => 'relationships#followers', as: 'followers'
   end
   get "search" => "searches#search"
+  post 'favorite/:id' => 'favorites#create', as: 'create_favorite'
+  delete 'favorite/:id' => 'favorites#destroy', as: 'destroy_favorite'
 end
 
