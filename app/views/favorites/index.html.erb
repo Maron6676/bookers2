@@ -16,9 +16,13 @@
 
 
         <% if current_user.favorited_by?(book.id) %>
-          <td><%= link_to 'いいねを外す', destroy_favorite_path(book), method: :DELETE %></td>
+          <td><%= link_to destroy_favorite_path(book), method: :DELETE, class:"text-danger" do %>
+                ♥️<%= book.favorites.count %>
+              <% end %></td>
         <% else %>
-          <td><%= link_to 'いいね', create_favorite_path(book), method: :POST %></td>
+          <td><%= link_to create_favorite_path(book), method: :POST do %>
+                ♥<%= book.favorites.count %>
+              <% end %></td>
         <% end %>
         <td><%= link_to 'Show', book %></td>
         <td><%= link_to 'Edit', edit_book_path(book) %></td>

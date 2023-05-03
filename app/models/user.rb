@@ -22,6 +22,7 @@ class User < ApplicationRecord
   has_many :followers, through: :relationshipss, source: :follower
 
   has_many :favorites, dependent: :destroy
+  has_many :book_comments, dependent: :destroy
 
   def get_profile_image
     unless profile_image.attached?
